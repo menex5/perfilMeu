@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Intervalo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="card" id="profileCard">
+        <div class="card-body text-center">
+            <img src="https://via.placeholder.com/150" alt="imagem de perfil" id="profileImage" class="rounded-circle mb-3" style="width: 150px;">
+            <h3 id="profileName">Nome: Meu perfil</h3>
+            <p id="profileAge">Idade: 18</p>
+
+            <h5>Hobbies:</h5>
+            <ul id="hobbiesList" class="list-group mb-2">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Leitura
+                    <button class="btn btn-sm btn-danger" onclick="apagarHobby(this)">Apagar</button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Esportes
+                    <button class="btn btn-sm btn-danger" onclick="apagarHobby(this)">Apagar</button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Música
+                    <button class="btn btn-sm btn-danger" onclick="apagarHobby(this)">Apagar</button>
+                </li>
+            </ul>
+
+            <button class="btn btn-primary me-2" onclick="alterarNome()">Alterar Nome</button>
+            <button class="btn btn-success me-2" onclick="adicionarHobby()">Adicionar Hobby</button>
+            <button class="btn btn-warning me-2" onclick="mudarCorDoFundo()">Mudar Fundo</button>
+            <button class="btn btn-info me-2" onclick="mudarIdade()">Mudar Idade</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function alterarNome() {
+        const novoNome = prompt("Digite o novo nome:");
+        if (novoNome) {
+            document.getElementById("profileName").textContent = "Nome: " + novoNome;
+        }
+    }
+
+    function adicionarHobby() {
+        const novoHobby = prompt("Digite um novo hobby:");
+        if (novoHobby) {
+            const li = document.createElement("li");
+            li.className = "list-group-item d-flex justify-content-between align-items-center";
+            li.textContent = novoHobby;
+
+            const button = document.createElement("button");
+            button.className = "btn btn-sm btn-danger";
+            button.textContent = "Apagar";
+            button.onclick = function () {
+                apagarHobby(button);
+            };
+
+            li.appendChild(button);
+            document.getElementById("hobbiesList").appendChild(li);
+        }
+    }
+
+    function apagarHobby(button) {
+        const li = button.parentNode; // Seleciona o item <li> pai do botão
+        li.remove(); // Remove o hobby da lista
+    }
+
+    function mudarCorDoFundo() {
+        const cores = ["#af87DA", "#adecff", "#dd4eda", "#fff3cd", "#cce5ff"];
+        const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
+        document.getElementById("profileCard").style.backgroundColor = corAleatoria;
+    }
+
+    function mudarIdade() {
+        const novaIdade = prompt("Digite a nova idade:");
+        if (novaIdade && !isNaN(novaIdade)) {
+            document.getElementById("profileAge").textContent = "Idade: " + novaIdade;
+        } else {
+            alert("Por favor, insira um número válido para a idade.");
+        }
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
